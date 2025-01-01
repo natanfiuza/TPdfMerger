@@ -25,14 +25,14 @@ elif __file__:
     dirbase = os.path.dirname(__file__)
 
 
-from classes.TUsuario import TUsuario
-from classes.TNFeProc import TNFeProc
-from classes.TMDFeProc import TMDFeProc
+# from classes.TUsuario import TUsuario
+# from classes.TNFeProc import TNFeProc
+# from classes.TMDFeProc import TMDFeProc
 
-from bs4 import BeautifulSoup
-from bs4.element import Tag
+#from bs4 import BeautifulSoup
+#from bs4.element import Tag
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 init()  # Iniciar colorama
 
