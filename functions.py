@@ -18,7 +18,7 @@ import json
 import time
 import glob
 import codecs
-import logging
+#import logging
 import shutil
 import datetime
 import subprocess
@@ -63,12 +63,12 @@ def open_json_file(filename= ""):
 
     except FileNotFoundError as error:
         msg_error = f"File {filename} not found."
-        logging.error(msg_error)
+        #logging.error(msg_error)
         print("\x1b[43m\x1b[31m"+msg_error+" \x1b[0m")
         return ""
     except json.decoder.JSONDecodeError as error:
         msg_error = f"File {filename}: error in json decoder"
-        logging.error(msg_error)
+        #logging.error(msg_error)
         print("\x1b[43m\x1b[31m"+msg_error+" \x1b[0m")
         return ""
     return json_object
@@ -90,7 +90,7 @@ def save_json_file(filename="", json_object=[]):
         json_file.close()
     except:
         msg_error = f"Error on save file: {filename}."
-        logging.error(msg_error)
+        #logging.error(msg_error)
         print(msg_error)        
         return False
 
@@ -135,7 +135,7 @@ def run_git_pull(source = ""):
 def run_import(source = "", run_command=""):
      
     print(f"Run Import NFe at {str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))}")
-    logging.info("Run Import NFe")
+    #logging.info("Run Import NFe")
     source = source.replace('\\','/')
     os.chdir(source)
     os.system(run_command)

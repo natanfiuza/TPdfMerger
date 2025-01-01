@@ -9,7 +9,7 @@ from classes.TObject import *
 
 import mysql.connector
 import sqlite3
-import logging
+# import logging
 
 class TDataBase(TObject):
     
@@ -33,10 +33,10 @@ class TDataBase(TObject):
                 )
     
             except Exception as err:
-                logging.error("Erro nao identificado: {}".format(err))
+                # logging.error("Erro nao identificado: {}".format(err))
                 print("Erro nao identificado: {}".format(err))
             else:
-                logging.info("Conectado ao banco de dado: host={0},db={1}".format(self.__host,self.__mydatabase))
+                # logging.info("Conectado ao banco de dado: host={0},db={1}".format(self.__host,self.__mydatabase))
                 self.__conectado = True
                 self.__mycursor = self.__mydb.cursor(dictionary=True)
 
@@ -47,10 +47,10 @@ class TDataBase(TObject):
                 self.__conectado = True
                 self.__mycursor = self.__mydb.cursor()
             except sqlite3.OperationalError as err:
-                logging.error("SGDB: {}, Erro sqlite3.OperationalError: {}".format(self.__sgdb,err))
+                # logging.error("SGDB: {}, Erro sqlite3.OperationalError: {}".format(self.__sgdb,err))
                 print("SGDB: {} ,Erro sqlite3.OperationalError: {}".format(self.__sgdb,err))  
             except Exception as err:
-                logging.error("SGDB: {}, Erro nao identificado: {}".format(self.__sgdb,err))
+                # logging.error("SGDB: {}, Erro nao identificado: {}".format(self.__sgdb,err))
                 print("SGDB: {} ,Erro nao identificado: {}".format(self.__sgdb,err))    
    
     @property
@@ -81,7 +81,7 @@ class TDataBase(TObject):
                 self.rowcount = self.__mycursor.rowcount
                 self.commit()
             except Exception as err:
-                logging.error("\\{TDataBase.execute\\} Erro não identificado: {}".format(err))
+                # logging.error("\\{TDataBase.execute\\} Erro não identificado: {}".format(err))
                 print("Erro nao identificado: {}".format(err))
             else:
                 return True
@@ -93,13 +93,11 @@ class TDataBase(TObject):
                 self.rowcount = self.__mycursor.rowcount
                 self.commit()
             except sqlite3.OperationalError as err:
-                logging.error(
-                    "SGDB: {}, Erro sqlite3.OperationalError: {}".format(self.__sgdb, err))
+                # logging.error(                    "SGDB: {}, Erro sqlite3.OperationalError: {}".format(self.__sgdb, err))
                 print("SGDB: {} ,Erro sqlite3.OperationalError: {}".format(
                     self.__sgdb, err))
             except Exception as err:
-                logging.error("TDataBase.execute SGDB: {}, Erro não identificado: {}".format(
-                    self.__sgdb, err))
+                # logging.error("TDataBase.execute SGDB: {}, Erro não identificado: {}".format(                    self.__sgdb, err))
                 print("TDataBase.execute SGDB: {}, Erro nao identificado: {}".format(
                     self.__sgdb, err))
             else:
@@ -121,13 +119,11 @@ class TDataBase(TObject):
                 self.__mycursor.execute(query)
                 self.rowcount = self.__mycursor.rowcount
             except Exception as err:
-                logging.error(
-                    "TDataBase.open Erro não identificado: {}".format(err))
+                # logging.error(                    "TDataBase.open Erro não identificado: {}".format(err))
                 print("Query:\n {}".format(query))
 
             except sqlite3.OperationalError as err:
-                logging.error(
-                    "TDataBase.open OperationalError: {}".format(err))
+                # logging.error(                    "TDataBase.open OperationalError: {}".format(err))
                 print("Query:\n {}".format(query))
 
             else:

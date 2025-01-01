@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import decorator
 import html
 import datetime
-import logging
+#import logging
 import shutil
 import sys
 from config import *
@@ -50,7 +50,7 @@ database_password = os.getenv('DB_PASSWORD')
 
 
 
-logging.info(f"Start")
+#logging.info(f"Start")
 
 
 # database = TDataBase(host=database_host,
@@ -105,4 +105,4 @@ if __name__ == '__main__':
 
 print(Style.RESET_ALL)
 
-logging.info(f"Finished")
+#logging.info(f"Finished")

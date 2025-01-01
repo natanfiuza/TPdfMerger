@@ -146,9 +146,8 @@ class TMDFeProc(TPersistente):
             self.createTable() # Cria a tabela caso ela nao exista
 			
         if TObject.isInteger(id)<0:
-            import logging
-            logging.warning(self.__class__.__name__ +
-                ".__init__  -> Valor de id nao e um inteiro ou maior igual a zero")
+            # import logging
+            # logging.warning(self.__class__.__name__ +                ".__init__  -> Valor de id nao e um inteiro ou maior igual a zero")
                 
         elif TObject.isInteger(id) > 0:
             self.recupera(id=id, nomeTabela=self.__nomeTabela,
