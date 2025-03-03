@@ -25,42 +25,11 @@ elif __file__:
     dirbase = os.path.dirname(__file__)
 
 
-# from classes.TUsuario import TUsuario
-# from classes.TNFeProc import TNFeProc
-# from classes.TMDFeProc import TMDFeProc
-
-#from bs4 import BeautifulSoup
-#from bs4.element import Tag
-
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 init()  # Iniciar colorama
 
 load_dotenv()
-
-# Banco de dados
-database_port = os.getenv('DB_PORT')
-database_host = os.getenv('DB_HOST')
-database_user = os.getenv('DB_USER')
-database_database = os.getenv('DB_DATABASE')
-database_password = os.getenv('DB_PASSWORD')
-
-# Parametros adicionais
-#URL_API = os.getenv('URL_API_UPLOAD')
-
-
-
-#logging.info(f"Start")
-
-
-# database = TDataBase(host=database_host,
-#                         user=database_user,
-#                         password=database_password,
-#                         sgdb='mysql',
-#                         mydatabase=database_database)
-
-# nfeproc = TNFeProc(id=0, pDataBase=database, tableprefix="")
-
 
 
 def merge_pdfs(paths, output):
@@ -81,17 +50,24 @@ def merge_pdfs(paths, output):
         merger.write(f)
 
 if __name__ == '__main__':
-    if len(sys.argv) < 4:
-        print("\n\nUso: python merge_pdf.py <arquivo1.pdf> <arquivo2.pdf> ... -output=<arquivo_saida.pdf>\n\n")
+    if len(sys.argv) < 2:
+        print(f"\nPdfMerger v{__version__}")
+        print("\nUso: PdfMerger [<file1.pdf> <file2.pdf> ... || -inputlist=<arquivo_lista.txt>] -output=<arquivo_saida.pdf>\n\n")
         sys.exit(1)
 
     paths = []
     output = None
+    inputlist_file = None
     for arg in sys.argv[1:]:
         if arg.startswith('-output='):
             output = arg[8:]
+        elif arg.startswith('-inputlist='):   
+            inputlist_file = arg[11:] 
         else:
             paths.append(arg)
+    
+    if inputlist_file:
+        paths = ler_arquivo_para_lista(inputlist_file)
 
     if not output:
         print("\n\nErro: O argumento -output é obrigatório.\n\n")
