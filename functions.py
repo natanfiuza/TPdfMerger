@@ -162,3 +162,62 @@ def tag_exist(tag_name='',str=''):
         return False
     
     return True if str.find(f"</{tag_name}>")>=0 else False
+
+    
+def ler_arquivo_para_lista(caminho_arquivo):
+    """
+    Lê um arquivo de texto e retorna uma lista onde cada linha do arquivo é um item.
+
+    Args:
+        caminho_arquivo: Uma string representando o caminho (path) completo para o arquivo de texto.
+
+    Returns:
+        Uma lista de strings, onde cada elemento é uma linha do arquivo.
+        Retorna uma lista vazia se o arquivo não existir ou ocorrer um erro.
+    """
+    try:
+        with open(caminho_arquivo, 'r', encoding='utf-8') as arquivo:  # 'r' para leitura, encoding='utf-8' para lidar com acentos e caracteres especiais
+            linhas = arquivo.readlines()
+        
+        #Remover caracteres de nova linha (\n) do final de cada linha
+        linhas_limpas = [linha.strip() for linha in linhas] #List comprehension
+        return linhas_limpas
+
+
+    except FileNotFoundError:
+        print(f"Erro: Arquivo '{caminho_arquivo}' não encontrado.")
+        return []  # Retorna uma lista vazia em caso de arquivo não encontrado
+    except Exception as e:
+        print(f"Erro ao ler o arquivo: {e}")
+        return []  # Retorna uma lista vazia em caso de outros erros
+
+def corrigir_caminho(caminho):
+    """
+    Corrige um caminho de arquivo (path) em string que usa barras invertidas duplas (\\\\)
+    e o converte para um formato utilizável em Python, de três maneiras diferentes.
+
+    Args:
+        caminho: Uma string representando o caminho com barras invertidas duplas.
+
+    Returns:
+        Uma tupla com três strings:
+            1. O caminho com barras invertidas simples ('\\').
+            2. O caminho com barras normais ('/').
+            3. O caminho utilizando os.path.normpath() para obter a representação
+               canônica (a forma mais "correta" e portátil) do caminho.
+        Retorna (None, None, None) se a entrada não for uma string.
+    """
+    if not isinstance(caminho, str):
+        print("Erro: A entrada deve ser uma string.")
+        return None, None, None
+
+    # 1. Substituir \\ por \ (barras invertidas simples)
+    caminho_barras_simples = caminho.replace("\\\\", "\\")
+
+    # 2. Substituir \\ por / (barras normais)
+    caminho_barras_normais = caminho.replace("\\\\", "/")
+
+    # 3. Usar os.path.normpath() (MELHOR OPÇÃO)
+    caminho_normalizado = os.path.normpath(caminho)
+
+    return caminho_barras_simples, caminho_barras_normais, caminho_normalizado
